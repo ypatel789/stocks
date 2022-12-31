@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="4"></td>
+            <td>Cash ${{ cash }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td>TOTAL ${{ total }}</td>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for summary in summaries %}
+            <tr>
+                <td>{{ summary['sym'] }}</td>
+                <td>{{ summary['name'] }}</td>
+                <td>{{ summary['shares'] }}</td>
+                <td>${{ summary['price'] }}</td>
+                <td>${{ summary['total'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

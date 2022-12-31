@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Buy/Sell</th>
+            <th>Date & Time</th>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for summary in transactions %}
+            <tr>
+
+                {% if summary['shares'] > 0 %}
+                    <td>Buy</td>
+                {% else %}
+                    <td>Sell</td>
+                {% endif %}
+                <td>{{ summary['date'] }}</td>
+                <td>{{ summary['symbol'] }}</td>
+                <td>{{ summary['name'] }}</td>
+                {% if summary['shares'] > 0 %}
+                    <td>{{summary['shares']}}</td>
+                {% else %}
+                    <td>{{summary['shares'] * -1}}</td>
+                {% endif %}
+                <td>${{ summary['price'] }}</td>
+                {% if summary['shares'] > 0 %}
+                    <td>${{summary['shares'] * summary['price']}}</td>
+                {% else %}
+                    <td>${{summary['shares'] * -1 * summary['price']}}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
